@@ -7,7 +7,10 @@ export function LogoMarquee({ items, reverse }: Props) {
       <div
         className="flex gap-14 w-max"
         style={{
-          animation: `marquee ${reverse ? "55s" : "45s"} linear infinite`,
+          animationName: "marquee",
+          animationDuration: "30s",
+          animationTimingFunction: "linear",
+          animationIterationCount: "infinite",
           animationDirection: reverse ? "reverse" : "normal",
         }}
       >
