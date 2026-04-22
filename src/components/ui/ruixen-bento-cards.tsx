@@ -42,7 +42,8 @@ const PlusCard: React.FC<BentoCardItem> = ({
   return (
     <div
       className={cn(
-        "group relative rounded-2xl p-7 min-h-[200px] flex flex-col justify-between transition-all bento-dashed",
+        "group relative rounded-2xl p-7 min-h-[200px] flex flex-col justify-between bento-dashed",
+        "transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5",
         className,
       )}
     >
