@@ -85,9 +85,13 @@ export function Navbar() {
                 </li>
               ))}
               <li className="pt-2">
-                <Button asChild className="w-full rounded-full">
-                  <Link to="/contact" onClick={() => setOpen(false)}>Book a Consultation</Link>
-                </Button>
+                <Link
+                  to="/contact"
+                  onClick={() => setOpen(false)}
+                  className={getStartedClasses("primary", "w-full justify-start")}
+                >
+                  <GetStartedInner label="Book a Consultation" variant="primary" />
+                </Link>
               </li>
             </ul>
           </div>
