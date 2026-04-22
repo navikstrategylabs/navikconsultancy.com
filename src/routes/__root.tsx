@@ -29,14 +29,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { name: "description", content: "NaviK Strategy Labs partners with startups and growing businesses to bring clarity, structure, and momentum to growth." },
+      { name: "author", content: "NaviK Strategy Labs" },
+      { property: "og:title", content: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { property: "og:description", content: "Strategy + Execution under one roof. We help founders move from uncertainty to clarity, planning to execution, and traction to scale." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
