@@ -8,6 +8,7 @@ import { Counter } from "@/components/Counter";
 import { Button } from "@/components/ui/button";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 import { InfiniteGrid } from "@/components/ui/the-infinite-grid";
+import RuixenBentoCards from "@/components/ui/ruixen-bento-cards";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -126,19 +127,15 @@ function HomePage() {
             <p className="text-sm uppercase tracking-widest text-primary font-semibold">Core Services</p>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold">A complete partner for the journey.</h2>
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.06}>
-                <div className="group h-full rounded-2xl bg-surface-elevated border border-border p-7 hover-lift">
-                  <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <s.icon className="size-6" />
-                  </div>
-                  <h3 className="mt-5 text-xl font-bold">{s.title}</h3>
-                  <p className="mt-3 text-muted-foreground leading-relaxed">{s.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <RuixenBentoCards
+              items={services.map((s) => ({
+                title: s.title,
+                description: s.desc,
+                icon: s.icon,
+              }))}
+            />
+          </Reveal>
         </div>
       </section>
 
