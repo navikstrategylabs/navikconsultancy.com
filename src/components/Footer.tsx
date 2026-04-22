@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/navik-logo.png";
+import logo from "@/assets/navik_white_logo.png";
 
 export function Footer() {
   return (
@@ -9,20 +9,25 @@ export function Footer() {
       <div className="container-tight relative py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
-            <img src={logo} alt="NaviK" className="h-12 w-auto bg-white/95 rounded-lg p-2 inline-block" />
+            <img src={logo} alt="NaviK" className="h-20 w-auto inline-block" />
             <p className="mt-5 max-w-md text-primary-foreground/80 leading-relaxed">
               We partner with startups and growing businesses to bring clarity to ideas,
               structure to operations, and momentum to growth.
             </p>
             <div className="mt-6 flex items-center gap-3">
-              {[Linkedin, Twitter, Instagram].map((Icon, i) => (
+              {[
+                { Icon: Linkedin, href: "https://www.linkedin.com/company/navik-strategy-labs", label: "LinkedIn" },
+                { Icon: Instagram, href: "https://www.instagram.com/navikstrategylabs?igsh=MW4zcWZ4MzBzYmM3dg==", label: "Instagram" },
+              ].map((social, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="size-10 rounded-full glass-dark flex items-center justify-center hover:bg-white/20 transition-colors"
-                  aria-label="Social link"
+                  aria-label={social.label}
                 >
-                  <Icon className="size-4" />
+                  <social.Icon className="size-4" />
                 </a>
               ))}
             </div>
@@ -50,9 +55,9 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/60">Contact</h4>
             <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-              <li className="flex items-start gap-2"><Mail className="size-4 mt-0.5 shrink-0" /> hello@naviklabs.com</li>
-              <li className="flex items-start gap-2"><Phone className="size-4 mt-0.5 shrink-0" /> +91 90000 00000</li>
-              <li className="flex items-start gap-2"><MapPin className="size-4 mt-0.5 shrink-0" /> Bengaluru, India</li>
+              <li className="flex items-start gap-2"><Mail className="size-4 mt-0.5 shrink-0" /> connect@navikconsultancy.com</li>
+              <li className="flex items-start gap-2"><Phone className="size-4 mt-0.5 shrink-0" /> +91 92921 09404</li>
+              <li className="flex items-start gap-2"><MapPin className="size-4 mt-0.5 shrink-0" /> Kochi, India</li>
             </ul>
           </div>
         </div>
