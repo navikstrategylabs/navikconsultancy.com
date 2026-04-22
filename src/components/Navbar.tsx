@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/navik-logo.png";
 import { Button } from "@/components/ui/button";
+import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 const links = [
   { to: "/", label: "Home" },
