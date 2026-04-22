@@ -56,9 +56,9 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:block">
-            <Button asChild variant="default" className="rounded-full bg-primary hover:bg-primary/90 shadow-elegant">
-              <Link to="/contact">Book a Consultation</Link>
-            </Button>
+            <Link to="/contact" className={getStartedClasses("primary", "h-11 text-sm pl-5 pr-12")}>
+              <GetStartedInner label="Book a Consultation" variant="primary" />
+            </Link>
           </div>
 
           <button
