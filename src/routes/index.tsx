@@ -4,6 +4,7 @@ import { Calendar, Compass, Target, Cog, TrendingUp, Users, Sparkles, CheckCircl
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { LogoMarquee } from "@/components/LogoMarquee";
+import { WhyMarquee } from "@/components/WhyMarquee";
 import { Counter } from "@/components/Counter";
 import { Button } from "@/components/ui/button";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
@@ -177,16 +178,10 @@ function HomePage() {
             <p className="text-sm uppercase tracking-widest text-primary-foreground/70 font-semibold">Why NaviK</p>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold text-primary-foreground">Built for founders who ship.</h2>
           </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {why.map((w, i) => (
-              <Reveal key={w} delay={i * 0.06}>
-                <div className="flex items-start gap-4 rounded-2xl glass-dark p-6">
-                  <CheckCircle2 className="size-6 text-white shrink-0 mt-0.5" />
-                  <p className="text-lg font-medium text-primary-foreground">{w}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+        </div>
+        <div className="mt-12 space-y-5 relative">
+          <WhyMarquee items={why} />
+          <WhyMarquee items={why.slice().reverse()} reverse />
         </div>
       </section>
 
