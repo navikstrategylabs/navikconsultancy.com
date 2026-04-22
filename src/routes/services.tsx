@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Compass, Target, Cog, TrendingUp, Users, ArrowRight, Check } from "lucide-react";
+import { Compass, Target, Cog, TrendingUp, Users, Check } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { Button } from "@/components/ui/button";
+import { GetStartedButton } from "@/components/ui/get-started-button";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -109,10 +109,10 @@ function ServicesPage() {
                 <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground max-w-3xl mx-auto leading-tight">
                   Looking to scale your business with clarity and structure?
                 </h2>
-                <div className="mt-10">
-                  <Button asChild size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 text-base px-8 h-13 shadow-glow">
-                    <Link to="/contact">Schedule a Call <ArrowRight className="ml-1 size-4" /></Link>
-                  </Button>
+                <div className="mt-10 flex justify-center">
+                  <GetStartedButton asChild variant="onDark" label="Schedule a Call">
+                    <Link to="/contact" />
+                  </GetStartedButton>
                 </div>
               </div>
             </div>

@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Compass, Target, Cog, TrendingUp, Users, Sparkles, CheckCircle2 } from "lucide-react";
+import { Calendar, Compass, Target, Cog, TrendingUp, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { Counter } from "@/components/Counter";
 import { Button } from "@/components/ui/button";
+import { GetStartedButton } from "@/components/ui/get-started-button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,9 +71,9 @@ function HomePage() {
               structure to operations, and momentum to growth.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button asChild size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 shadow-glow text-base px-7 h-12">
-                <Link to="/contact">Work With Us <ArrowRight className="ml-1 size-4" /></Link>
-              </Button>
+              <GetStartedButton asChild variant="onDark" label="Work With Us">
+                <Link to="/contact" />
+              </GetStartedButton>
               <Button asChild size="lg" variant="outline" className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white text-base px-7 h-12 backdrop-blur">
                 <Link to="/contact"><Calendar className="mr-1 size-4" /> Book a Consultation</Link>
               </Button>
@@ -234,10 +235,10 @@ function HomePage() {
                 <h2 className="text-4xl md:text-6xl font-bold text-primary-foreground leading-tight">
                   Let's build something <br className="hidden md:block" />that <span className="italic font-light">scales.</span>
                 </h2>
-                <div className="mt-10">
-                  <Button asChild size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 text-base px-8 h-13 shadow-glow">
-                    <Link to="/contact">Book a Consultation <ArrowRight className="ml-1 size-4" /></Link>
-                  </Button>
+                <div className="mt-10 flex justify-center">
+                  <GetStartedButton asChild variant="onDark" label="Book a Consultation">
+                    <Link to="/contact" />
+                  </GetStartedButton>
                 </div>
               </div>
             </div>

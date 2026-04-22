@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Quote, Target, Compass, Lightbulb } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { Button } from "@/components/ui/button";
+import { GetStartedButton } from "@/components/ui/get-started-button";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -127,10 +127,10 @@ function AboutPage() {
               </div>
             </div>
           </Reveal>
-          <div className="mt-12 text-center">
-            <Button asChild size="lg" className="rounded-full px-7 h-12">
-              <Link to="/contact">Start a Conversation</Link>
-            </Button>
+          <div className="mt-12 flex justify-center">
+            <GetStartedButton asChild label="Start a Conversation">
+              <Link to="/contact" />
+            </GetStartedButton>
           </div>
         </div>
       </section>

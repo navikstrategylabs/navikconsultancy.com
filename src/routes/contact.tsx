@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { Button } from "@/components/ui/button";
+import { GetStartedButton } from "@/components/ui/get-started-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -157,9 +157,11 @@ function ContactPage() {
                 </div>
               </div>
               <div className="mt-8 flex items-center justify-end">
-                <Button type="submit" size="lg" disabled={submitting} className="rounded-full px-8 h-12">
-                  {submitting ? "Sending..." : <>Start the Conversation <Send className="ml-2 size-4" /></>}
-                </Button>
+                <GetStartedButton
+                  type="submit"
+                  disabled={submitting}
+                  label={submitting ? "Sending..." : "Start the Conversation"}
+                />
               </div>
             </form>
           </Reveal>
