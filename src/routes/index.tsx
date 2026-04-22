@@ -7,6 +7,7 @@ import { LogoMarquee } from "@/components/LogoMarquee";
 import { Counter } from "@/components/Counter";
 import { Button } from "@/components/ui/button";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
+import { InfiniteGrid } from "@/components/ui/the-infinite-grid";
 
 export const Route = createFileRoute("/")({
   head: () => ({
