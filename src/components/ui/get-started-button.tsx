@@ -12,6 +12,14 @@ const variantClasses: Record<Variant, string> = {
   onDark: "bg-white text-primary hover:bg-white/90 shadow-glow",
 };
 
+export function getStartedClasses(variant: Variant = "primary", className?: string) {
+  return cn(baseClasses, variantClasses[variant], className);
+}
+
+export function GetStartedInner({ label, variant = "primary" }: { label: string; variant?: Variant }) {
+  return <Inner label={label} variant={variant} />;
+}
+
 function Inner({ label, variant }: { label: string; variant: Variant }) {
   const chip =
     variant === "onDark"
