@@ -52,7 +52,7 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-hero-gradient" />
         <div className="absolute inset-0 bg-radial-glow opacity-70" />
-        <div className="absolute inset-0 opacity-[0.06] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
+        <InfiniteGrid />
 
         <div className="container-tight relative py-24 md:py-36">
           <motion.div
