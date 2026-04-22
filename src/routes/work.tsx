@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { GetStartedButton } from "@/components/ui/get-started-button";
+import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
@@ -111,9 +111,9 @@ function WorkPage() {
               Your story could be the <span className="text-gradient">next one.</span>
             </h2>
             <div className="mt-10 flex justify-center">
-              <GetStartedButton asChild label="Start the Conversation">
-                <Link to="/contact" />
-              </GetStartedButton>
+              <Link to="/contact" className={getStartedClasses("primary")}>
+                <GetStartedInner label="Start the Conversation" />
+              </Link>
             </div>
           </Reveal>
         </div>

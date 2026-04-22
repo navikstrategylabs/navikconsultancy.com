@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Compass, Target, Cog, TrendingUp, Users, Check } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { GetStartedButton } from "@/components/ui/get-started-button";
+import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -110,9 +110,9 @@ function ServicesPage() {
                   Looking to scale your business with clarity and structure?
                 </h2>
                 <div className="mt-10 flex justify-center">
-                  <GetStartedButton asChild variant="onDark" label="Schedule a Call">
-                    <Link to="/contact" />
-                  </GetStartedButton>
+                  <Link to="/contact" className={getStartedClasses("onDark")}>
+                    <GetStartedInner label="Schedule a Call" variant="onDark" />
+                  </Link>
                 </div>
               </div>
             </div>
