@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/navik-logo.png";
 import { Button } from "@/components/ui/button";
+import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 const links = [
   { to: "/", label: "Home" },
@@ -55,9 +56,9 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:block">
-            <Button asChild variant="default" className="rounded-full bg-primary hover:bg-primary/90 shadow-elegant">
-              <Link to="/contact">Book a Consultation</Link>
-            </Button>
+            <Link to="/contact" className={getStartedClasses("primary", "h-11 text-sm pl-5 pr-12")}>
+              <GetStartedInner label="Book a Consultation" variant="primary" />
+            </Link>
           </div>
 
           <button
@@ -84,9 +85,13 @@ export function Navbar() {
                 </li>
               ))}
               <li className="pt-2">
-                <Button asChild className="w-full rounded-full">
-                  <Link to="/contact" onClick={() => setOpen(false)}>Book a Consultation</Link>
-                </Button>
+                <Link
+                  to="/contact"
+                  onClick={() => setOpen(false)}
+                  className={getStartedClasses("primary", "w-full justify-start")}
+                >
+                  <GetStartedInner label="Book a Consultation" variant="primary" />
+                </Link>
               </li>
             </ul>
           </div>
