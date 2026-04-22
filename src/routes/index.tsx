@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { Counter } from "@/components/Counter";
 import { Button } from "@/components/ui/button";
-import { GetStartedButton } from "@/components/ui/get-started-button";
+import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -71,9 +71,9 @@ function HomePage() {
               structure to operations, and momentum to growth.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <GetStartedButton asChild variant="onDark" label="Work With Us">
-                <Link to="/contact" />
-              </GetStartedButton>
+              <Link to="/contact" className={getStartedClasses("onDark")}>
+                <GetStartedInner label="Work With Us" variant="onDark" />
+              </Link>
               <Button asChild size="lg" variant="outline" className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white text-base px-7 h-12 backdrop-blur">
                 <Link to="/contact"><Calendar className="mr-1 size-4" /> Book a Consultation</Link>
               </Button>
@@ -236,9 +236,9 @@ function HomePage() {
                   Let's build something <br className="hidden md:block" />that <span className="italic font-light">scales.</span>
                 </h2>
                 <div className="mt-10 flex justify-center">
-                  <GetStartedButton asChild variant="onDark" label="Book a Consultation">
-                    <Link to="/contact" />
-                  </GetStartedButton>
+                  <Link to="/contact" className={getStartedClasses("onDark")}>
+                    <GetStartedInner label="Book a Consultation" variant="onDark" />
+                  </Link>
                 </div>
               </div>
             </div>
