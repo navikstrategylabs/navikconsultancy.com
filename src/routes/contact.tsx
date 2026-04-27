@@ -11,6 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/sonner";
 
+import { HoverGlow } from "@/components/ui/hover-glow";
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -78,8 +80,11 @@ function ContactPage() {
       <section className="pb-24 md:pb-32">
         <div className="container-tight grid lg:grid-cols-12 gap-10">
           {/* Info */}
-          <Reveal className="lg:col-span-4">
-            <div className="rounded-3xl bg-hero-gradient text-primary-foreground p-10 h-full relative overflow-hidden">
+          <Reveal className="lg:col-span-4 h-full">
+            <HoverGlow 
+              className="rounded-3xl bg-hero-gradient text-primary-foreground p-10 h-full border border-white/5"
+              glowColor="rgba(255,255,255,0.4)"
+            >
               <div className="absolute inset-0 bg-radial-glow opacity-50" />
               <div className="relative space-y-8">
                 <div>
@@ -95,7 +100,7 @@ function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-widest text-primary-foreground/60">Email</div>
-                      <a href="mailto:hello@naviklabs.com" className="font-medium hover:underline">hello@naviklabs.com</a>
+                      <a href="mailto:connect@navikconsultancy.com" className="font-medium hover:underline">connect@navikconsultancy.com</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-4">
@@ -104,7 +109,7 @@ function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-widest text-primary-foreground/60">Phone</div>
-                      <a href="tel:+910000000000" className="font-medium hover:underline">+91 90000 00000</a>
+                      <a href="tel:+919292109404" className="font-medium hover:underline">+91 92921 09404</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-4">
@@ -113,12 +118,12 @@ function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-widest text-primary-foreground/60">Location</div>
-                      <div className="font-medium">Bengaluru, India</div>
+                      <div className="font-medium">Kochi, India</div>
                     </div>
                   </li>
                 </ul>
               </div>
-            </div>
+            </HoverGlow>
           </Reveal>
 
           {/* Form */}

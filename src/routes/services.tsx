@@ -4,6 +4,8 @@ import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
+import { HoverGlow } from "@/components/ui/hover-glow";
+
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
@@ -103,19 +105,24 @@ function ServicesPage() {
       <section className="pb-24 md:pb-32">
         <div className="container-tight">
           <Reveal>
-            <div className="relative overflow-hidden rounded-3xl bg-hero-gradient p-12 md:p-20 text-center">
-              <div className="absolute inset-0 bg-radial-glow opacity-60" />
+            <HoverGlow 
+              className="rounded-[2.5rem] bg-hero-gradient p-12 md:p-20 text-center border border-white/10 shadow-2xl"
+              glowColor="rgba(255,255,255,0.4)"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-primary-glow/40 via-transparent to-transparent opacity-80" />
+              
               <div className="relative">
-                <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground max-w-3xl mx-auto leading-tight">
-                  Looking to scale your business with clarity and structure?
+                <h2 className="text-3xl md:text-5xl font-bold text-white max-w-3xl mx-auto leading-tight tracking-tight">
+                  Looking to scale your business with <br className="hidden md:block" /><span className="italic font-light">clarity and structure?</span>
                 </h2>
                 <div className="mt-10 flex justify-center">
-                  <Link to="/contact" className={getStartedClasses("onDark")}>
+                  <Link to="/contact" className={getStartedClasses("onDark", "shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)]")}>
                     <GetStartedInner label="Schedule a Call" variant="onDark" />
                   </Link>
                 </div>
               </div>
-            </div>
+            </HoverGlow>
           </Reveal>
         </div>
       </section>

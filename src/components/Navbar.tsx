@@ -45,8 +45,8 @@ export function Navbar() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-foreground/75 hover:text-primary transition-colors relative"
-                  activeProps={{ className: "px-4 py-2 rounded-lg text-sm font-medium text-primary" }}
+                  className="relative px-4 py-2 rounded-lg text-sm font-medium text-foreground/75 hover:text-primary transition-colors after:absolute after:bottom-1.5 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-out"
+                  activeProps={{ className: "text-primary after:scale-x-100" }}
                   activeOptions={{ exact: l.to === "/" }}
                 >
                   {l.label}
@@ -56,9 +56,9 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:block">
-            <Link to="/contact" className={getStartedClasses("primary", "h-11 text-sm pl-5 pr-12")}>
+            <a href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs" target="_blank" rel="noopener noreferrer" className={getStartedClasses("primary", "h-11 text-sm pl-5 pr-12")}>
               <GetStartedInner label="Book a Consultation" variant="primary" />
-            </Link>
+            </a>
           </div>
 
           <button
@@ -78,20 +78,23 @@ export function Navbar() {
                   <Link
                     to={l.to}
                     onClick={() => setOpen(false)}
-                    className="block px-4 py-3 rounded-lg text-sm font-medium hover:bg-secondary"
+                    className="block px-4 py-3 rounded-lg text-sm font-medium text-foreground/75 hover:bg-secondary/50 transition-colors"
+                    activeProps={{ className: "text-primary bg-primary/5" }}
+                    activeOptions={{ exact: l.to === "/" }}
                   >
                     {l.label}
                   </Link>
                 </li>
               ))}
               <li className="pt-2">
-                <Link
-                  to="/contact"
-                  onClick={() => setOpen(false)}
+                <a
+                  href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={getStartedClasses("primary", "w-full justify-start")}
                 >
                   <GetStartedInner label="Book a Consultation" variant="primary" />
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

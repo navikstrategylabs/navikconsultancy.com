@@ -1,5 +1,6 @@
+import React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Calendar, Compass, Target, Cog, TrendingUp, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
@@ -10,7 +11,11 @@ import { Counter } from "@/components/Counter";
 import { Button } from "@/components/ui/button";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 import { InfiniteGrid } from "@/components/ui/the-infinite-grid";
+import { HoverGlow } from "@/components/ui/hover-glow";
 import RuixenBentoCards from "@/components/ui/ruixen-bento-cards";
+import strategyImg from "@/assets/strategy_planning.png";
+import executionImg from "@/assets/execution_workspace.png";
+import growthImg from "@/assets/growth_momentum.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,13 +53,37 @@ const why = [
 const partners = ["Google", "Zoho", "Canva", "Meta", "Shopify", "AWS", "HubSpot", "OpenAI", "Slack", "Notion", "Stripe", "Figma", "Microsoft", "Atlassian"];
 
 function HomePage() {
+  const ctaMouseX = useMotionValue(-9999);
+  const ctaMouseY = useMotionValue(-9999);
+
+  const handleCtaMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    ctaMouseX.set(e.clientX - left);
+    ctaMouseY.set(e.clientY - top);
+  };
+
+  const handleCtaMouseLeave = () => {
+    ctaMouseX.set(-9999);
+    ctaMouseY.set(-9999);
+  };
+
+  const ctaGlowBackground = useMotionTemplate`radial-gradient(circle 400px at ${ctaMouseX}px ${ctaMouseY}px, rgba(255,255,255,0.3), transparent 80%)`;
+
   return (
     <PageShell>
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-hero-gradient" />
-        <div className="absolute inset-0 bg-radial-glow opacity-70" />
-        <InfiniteGrid />
+        <div 
+          className="absolute inset-0"
+          style={{ 
+            WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+            maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)"
+          }}
+        >
+          <div className="absolute inset-0 bg-hero-gradient" />
+          <div className="absolute inset-0 bg-radial-glow opacity-70" />
+          <InfiniteGrid />
+        </div>
 
         <div className="container-tight relative py-24 md:py-36">
           <motion.div
@@ -78,7 +107,9 @@ function HomePage() {
                 <GetStartedInner label="Work With Us" variant="onDark" />
               </Link>
               <Button asChild size="lg" variant="outline" className="rounded-full border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white text-base px-7 h-12 backdrop-blur">
-                <Link to="/contact"><Calendar className="mr-1 size-4" /> Book a Consultation</Link>
+                <a href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs" target="_blank" rel="noopener noreferrer">
+                  <Calendar className="mr-1 size-4" /> Book a Consultation
+                </a>
               </Button>
             </div>
 
@@ -98,26 +129,61 @@ function HomePage() {
             </div>
           </motion.div>
         </div>
-
-        <div className="absolute -bottom-px inset-x-0 h-24 bg-gradient-to-b from-transparent to-background" />
       </section>
-
-      {/* WHAT WE DO */}
-      <section className="py-24 md:py-32">
+      <section className="py-24 md:py-40 relative">
         <div className="container-tight">
-          <Reveal className="max-w-3xl">
-            <p className="text-sm uppercase tracking-widest text-primary font-semibold">What We Do</p>
-            <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              From uncertainty to clarity. From planning to execution.
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              We help businesses move from uncertainty to clarity, from planning to execution,
-              and from early traction to scalable growth.
-            </p>
-            <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              Our approach combines strategic thinking with hands-on execution to deliver measurable outcomes.
-            </p>
-          </Reveal>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <Reveal>
+              <p className="text-sm uppercase tracking-widest text-primary font-semibold">What We Do</p>
+              <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                From uncertainty to clarity. From planning to execution.
+              </h2>
+              <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
+                We help businesses move from uncertainty to clarity, from planning to execution,
+                and from early traction to scalable growth.
+              </p>
+              <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
+                Our approach combines strategic thinking with hands-on execution to deliver measurable outcomes.
+              </p>
+              <div className="mt-10 flex items-center gap-6">
+                <div className="flex -space-x-3">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="size-10 rounded-full border-2 border-background bg-surface-elevated flex items-center justify-center overflow-hidden">
+                      <div className="size-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">NSL</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground font-medium">Trusted by 50+ founders</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2} className="relative">
+              <div className="grid grid-cols-2 gap-4 h-[500px] md:h-[600px]">
+                <div className="col-span-2 row-span-1 relative overflow-hidden rounded-3xl shadow-elegant hover-lift group">
+                  <img src={strategyImg} alt="Strategy Planning" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                    <p className="text-white font-medium">Strategic Vision</p>
+                  </div>
+                </div>
+                <div className="col-span-1 row-span-1 relative overflow-hidden rounded-3xl shadow-elegant hover-lift group">
+                  <img src={executionImg} alt="Hands-on Execution" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                    <p className="text-white font-sm">Seamless Execution</p>
+                  </div>
+                </div>
+                <div className="col-span-1 row-span-1 relative overflow-hidden rounded-3xl shadow-elegant hover-lift group">
+                  <img src={growthImg} alt="Sustainable Growth" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                    <p className="text-white font-sm">Scale & Growth</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative background elements */}
+              <div className="absolute -top-12 -right-12 size-64 bg-primary/5 rounded-full blur-3xl -z-10" />
+              <div className="absolute -bottom-12 -left-12 size-64 bg-primary-glow/5 rounded-full blur-3xl -z-10" />
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -211,22 +277,62 @@ function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 md:py-32">
+      <section className="py-24 md:py-32 relative">
         <div className="container-tight">
           <Reveal>
-            <div className="relative overflow-hidden rounded-3xl bg-hero-gradient p-12 md:p-20 text-center">
-              <div className="absolute inset-0 bg-radial-glow opacity-60" />
-              <div className="relative">
-                <h2 className="text-4xl md:text-6xl font-bold text-primary-foreground leading-tight">
-                  Let's build something <br className="hidden md:block" />that <span className="italic font-light">scales.</span>
+            <HoverGlow 
+              className="rounded-[2.5rem] border border-white/10 shadow-2xl bg-hero-gradient"
+              glowColor="rgba(255,255,255,0.4)"
+            >
+              {/* Complex Background Layers */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-primary-glow/40 via-transparent to-transparent opacity-80" />
+              
+              {/* Subtle Dot Pattern */}
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+
+              <div className="relative px-8 py-12 md:py-16 lg:py-20 md:px-20 flex flex-col items-center text-center max-w-4xl mx-auto">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/90 text-sm font-medium mb-6 backdrop-blur-md"
+                >
+                  <Sparkles className="size-4 text-primary-foreground" /> 
+                  <span>Ready to transform your business?</span>
+                </motion.div>
+                
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+                  Let's build something <br className="hidden md:block" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/50 italic font-light">that scales.</span>
                 </h2>
-                <div className="mt-10 flex justify-center">
-                  <Link to="/contact" className={getStartedClasses("onDark")}>
-                    <GetStartedInner label="Book a Consultation" variant="onDark" />
-                  </Link>
+                
+                <p className="mt-5 md:mt-6 text-lg text-white/70 leading-relaxed max-w-2xl font-light">
+                  Stop guessing and start executing. Partner with us to bring clarity to your vision, structure to your operations, and momentum to your growth.
+                </p>
+
+                <div className="mt-8 md:mt-10 flex flex-col items-center justify-center gap-6 w-full">
+                  <a 
+                    href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={getStartedClasses("onDark", "shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)]")}
+                  >
+                    <GetStartedInner label="Book Your Free Consultation" variant="onDark" />
+                  </a>
+                </div>
+                
+                <div className="mt-6 flex items-center justify-center gap-6 text-sm text-white/50 font-medium">
+                  <span className="flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-white/70" /> No commitment required
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-white/70" /> 30-minute discovery call
+                  </span>
                 </div>
               </div>
-            </div>
+            </HoverGlow>
           </Reveal>
         </div>
       </section>

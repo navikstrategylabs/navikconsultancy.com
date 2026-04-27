@@ -1,12 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { HoverGlow } from "@/components/ui/hover-glow";
 import logo from "@/assets/navik_white_logo.png";
 
 export function Footer() {
   return (
-    <footer className="mt-24 bg-hero-gradient text-primary-foreground relative overflow-hidden">
-      <div className="absolute inset-0 bg-radial-glow opacity-50 pointer-events-none" />
-      <div className="container-tight relative py-16">
+    <footer className="mt-24">
+      <HoverGlow 
+        className="bg-hero-gradient text-primary-foreground relative overflow-hidden" 
+        glowColor="rgba(255,255,255,0.4)" 
+        glowSize={800}
+      >
+        <div className="absolute inset-0 bg-radial-glow opacity-50 pointer-events-none" />
+        <div className="container-tight relative py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
             <img src={logo} alt="NaviK" className="h-20 w-auto inline-block" />
@@ -67,6 +73,7 @@ export function Footer() {
           <p className="font-display tracking-wide">Where Strategy Meets Execution.</p>
         </div>
       </div>
+      </HoverGlow>
     </footer>
   );
 }

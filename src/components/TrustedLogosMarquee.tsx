@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 // Import all logos from the assets folder dynamically
-const logoFiles = import.meta.glob("../assets/trusted_company_logos/*.{png,jpg,jpeg,svg,webp}", {
+const logoFiles = import.meta.glob("../assets/trusted_company_logos/*.webp", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
