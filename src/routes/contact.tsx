@@ -118,7 +118,12 @@ function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-widest text-primary-foreground/60">Location</div>
-                      <div className="font-medium">Kochi, India</div>
+                      <div className="font-medium leading-relaxed">
+                        NaviK Strategy Labs Pvt Ltd<br />
+                        36/267, Ground Floor, Mannath Building,<br />
+                        Seaport-Airport Road, Thrikkakara PO,<br />
+                        Ernakulam - 682021
+                      </div>
                     </div>
                   </li>
                 </ul>

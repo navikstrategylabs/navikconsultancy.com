@@ -14,13 +14,13 @@ export function Footer() {
         <div className="absolute inset-0 bg-radial-glow opacity-50 pointer-events-none" />
         <div className="container-tight relative py-16">
         <div className="grid gap-12 md:grid-cols-4">
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 flex flex-col items-center text-center md:items-start md:text-left">
             <img src={logo} alt="NaviK" className="h-20 w-auto inline-block" />
             <p className="mt-5 max-w-md text-primary-foreground/80 leading-relaxed">
               We partner with startups and growing businesses to bring clarity to ideas,
               structure to operations, and momentum to growth.
             </p>
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
               {[
                 { Icon: Linkedin, href: "https://www.linkedin.com/company/navik-strategy-labs", label: "LinkedIn" },
                 { Icon: Instagram, href: "https://www.instagram.com/navikstrategylabs?igsh=MW4zcWZ4MzBzYmM3dg==", label: "Instagram" },
@@ -39,7 +39,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/60">Quick Links</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               {[
@@ -58,12 +58,19 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/60">Contact</h4>
             <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-              <li className="flex items-start gap-2"><Mail className="size-4 mt-0.5 shrink-0" /> connect@navikconsultancy.com</li>
-              <li className="flex items-start gap-2"><Phone className="size-4 mt-0.5 shrink-0" /> +91 92921 09404</li>
-              <li className="flex items-start gap-2"><MapPin className="size-4 mt-0.5 shrink-0" /> Kochi, India</li>
+              <li className="flex flex-col md:flex-row items-center md:items-start gap-2"><Mail className="size-4 mt-0.5 shrink-0" /> connect@navikconsultancy.com</li>
+              <li className="flex flex-col md:flex-row items-center md:items-start gap-2"><Phone className="size-4 mt-0.5 shrink-0" /> +91 92921 09404</li>
+              <li className="flex flex-col md:flex-row items-center md:items-start gap-2">
+                <MapPin className="size-4 mt-0.5 shrink-0" />
+                <span>
+                  NaviK Strategy Labs Pvt Ltd<br />
+                  36/267, Ground Floor, Mannath Building,
+                  Thrikkakara PO,<br />Ernakulam - 682021
+                </span>
+              </li>
             </ul>
           </div>
         </div>

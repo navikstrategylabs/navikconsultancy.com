@@ -139,7 +139,7 @@ function AboutPage() {
       <section className="py-24 md:py-32">
         <div className="container-tight">
           <Reveal>
-            <div className="relative max-w-4xl mx-auto rounded-3xl bg-surface-elevated border border-border p-10 md:p-16 shadow-elegant">
+            <div className="relative max-w-4xl mx-auto rounded-3xl bg-surface-elevated border border-border p-10 md:p-16 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
               <Quote className="absolute -top-6 left-10 size-14 text-primary bg-background rounded-full p-3 shadow-elegant" />
               <p className="text-2xl md:text-3xl font-display leading-snug text-foreground">
                 "Navik is built to solve one of the biggest gaps in business - the disconnect
