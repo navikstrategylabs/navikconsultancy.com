@@ -5,7 +5,7 @@ import logo from "@/assets/navik_white_logo.png";
 
 export function Footer() {
   return (
-    <footer className="mt-24">
+    <footer>
       <HoverGlow 
         className="bg-hero-gradient text-primary-foreground relative overflow-hidden" 
         glowColor="rgba(255,255,255,0.4)" 

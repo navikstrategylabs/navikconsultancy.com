@@ -133,32 +133,43 @@ function ContactPage() {
               className="rounded-3xl bg-surface-elevated border border-border p-8 md:p-10 shadow-elegant"
             >
               <div className="grid md:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" name="name" placeholder="Your full name" required maxLength={100} />
+                <div className="space-y-2 group">
+                  <Label htmlFor="name" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Name</Label>
+                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/40 transition-all duration-200 bg-background">
+                    <Input id="name" name="name" placeholder="Your full name" required maxLength={100} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="company">Company Name</Label>
-                  <Input id="company" name="company" placeholder="Company / Brand" maxLength={120} />
+                  <Label htmlFor="company" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Company Name</Label>
+                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Input id="company" name="company" placeholder="Company / Brand" maxLength={120} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" type="email" placeholder="you@company.com" required maxLength={255} />
+                  <Label htmlFor="email" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Email</Label>
+                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Input id="email" name="email" type="email" placeholder="you@company.com" required maxLength={255} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
-                  <Input id="phone" name="phone" type="tel" placeholder="+91 ..." maxLength={40} />
+                  <Label htmlFor="phone" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Phone</Label>
+                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Input id="phone" name="phone" type="tel" placeholder="+91 ..." maxLength={40} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                  </div>
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <Label htmlFor="message">What do you need help with?</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us about your business, goals, and where we can help."
-                    rows={6}
-                    required
-                    maxLength={2000}
-                  />
+                  <Label htmlFor="message" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">What do you need help with?</Label>
+                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Textarea
+                      id="message"
+                      name="message"
+                      placeholder="Tell us about your business, goals, and where we can help."
+                      rows={6}
+                      required
+                      maxLength={2000}
+                      className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl resize-none"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="mt-8 flex items-center justify-end">

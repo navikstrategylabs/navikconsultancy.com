@@ -1,10 +1,9 @@
 import React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { Calendar, Compass, Target, Cog, TrendingUp, Users, Sparkles, CheckCircle2 } from "lucide-react";
+import { Calendar, Compass, Target, Cog, TrendingUp, Users, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { LogoMarquee } from "@/components/LogoMarquee";
 import { TrustedLogosMarquee } from "@/components/TrustedLogosMarquee";
 import { WhyMarquee } from "@/components/WhyMarquee";
 import { Counter } from "@/components/Counter";
@@ -116,17 +115,17 @@ function HomePage() {
               </Button>
             </div>
 
-            <div className="mt-20 grid grid-cols-3 gap-6 md:gap-12 max-w-2xl">
+            <div className="mt-20 flex items-stretch gap-0 max-w-2xl">
               {[
                 { v: 50, s: "+", l: "Founders advised" },
                 { v: 12, s: "+", l: "Industries served" },
                 { v: 100, s: "%", l: "Outcome focused" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="text-4xl md:text-5xl font-display font-bold text-primary-foreground">
+              ].map((s, i) => (
+                <div key={s.l} className={`flex-1 px-5 ${i > 0 ? "border-l border-white/15" : ""}` }>
+                  <div className="text-4xl md:text-5xl font-display font-bold text-primary-foreground tabular-nums">
                     <Counter to={s.v} suffix={s.s} />
                   </div>
-                  <div className="mt-1 text-sm text-primary-foreground/70">{s.l}</div>
+                  <div className="mt-2 text-xs uppercase tracking-widest text-primary-foreground/60 font-medium">{s.l}</div>
                 </div>
               ))}
             </div>
@@ -148,8 +147,7 @@ function HomePage() {
               <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Our approach combines strategic thinking with hands-on execution to deliver measurable outcomes.
               </p>
-              <div className="mt-10 flex items-center gap-6"> 
-              </div>
+
             </Reveal>
 
             <Reveal delay={0.2} className="relative">

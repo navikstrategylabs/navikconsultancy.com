@@ -33,7 +33,9 @@ export function Navbar() {
       <div className="container-tight">
         <nav
           className={`flex items-center justify-between rounded-2xl px-4 md:px-6 py-3 transition-all duration-500 ${
-            scrolled ? "glass shadow-elegant" : "bg-transparent"
+            scrolled
+              ? "glass shadow-elegant"
+              : "bg-white/40 backdrop-blur-md border border-border/30 shadow-sm"
           }`}
         >
           <Link to="/" className="flex items-center gap-2 shrink-0">

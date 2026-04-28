@@ -3,6 +3,7 @@ import { Quote, Target, Compass, Lightbulb } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
+import { PixelCanvas } from "@/components/ui/pixel-canvas";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -17,10 +18,13 @@ export const Route = createFileRoute("/about")({
 });
 
 const philosophy = [
-  { icon: Compass, text: "Strategy without execution has no value" },
-  { icon: Target, text: "Clarity drives better decisions" },
-  { icon: Lightbulb, text: "Structure enables scale" },
+  { icon: Compass, text: "Strategy without execution has no value", label: "Principle I" },
+  { icon: Target, text: "Clarity drives better decisions", label: "Principle II" },
+  { icon: Lightbulb, text: "Structure enables scale", label: "Principle III" },
 ];
+
+// Pixel colors for philosophy cards — indigo shimmer on white
+const PIXEL_COLORS = ["#c7d2fe", "#a5b4fc", "#818cf8"];
 
 function AboutPage() {
   return (
@@ -74,12 +78,17 @@ function AboutPage() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="rounded-3xl bg-surface border border-border p-10 md:p-12 h-full">
-              <p className="text-sm uppercase tracking-widest text-primary font-semibold">Mission</p>
-              <p className="mt-5 text-2xl md:text-3xl font-display font-medium leading-snug">
-                To bridge the gap between strategy and execution by delivering structured,
-                result-oriented solutions that drive measurable and sustainable growth.
-              </p>
+            {/* Mission — primary-tinted surface, accent border */}
+            <div className="rounded-3xl bg-primary/[0.04] border border-primary/20 p-10 md:p-12 h-full relative overflow-hidden">
+              {/* Subtle top-right glow accent */}
+              <div className="absolute -top-16 -right-16 size-48 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
+              <div className="relative">
+                <p className="text-sm uppercase tracking-widest text-primary font-semibold">Mission</p>
+                <p className="mt-5 text-2xl md:text-3xl font-display font-medium leading-snug text-foreground">
+                  To bridge the gap between strategy and execution by delivering structured,
+                  result-oriented solutions that drive measurable and sustainable growth.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -92,14 +101,33 @@ function AboutPage() {
             <p className="text-sm uppercase tracking-widest text-primary font-semibold">Philosophy</p>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold">What we believe.</h2>
           </Reveal>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-5">
             {philosophy.map((p, i) => (
               <Reveal key={p.text} delay={i * 0.08}>
-                <div className="h-full rounded-[2rem] bg-surface-elevated border border-border/60 p-10 md:p-12 hover-lift text-center shadow-sm flex flex-col items-center justify-center">
-                  <div className="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center ring-8 ring-primary/5">
-                    <p.icon className="size-6" />
+                <div className="group relative h-full rounded-2xl bg-white border border-border overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 ease-out hover:-translate-y-1.5 p-10 flex flex-col items-center text-center">
+                  {/* Pixel canvas animation */}
+                  <PixelCanvas
+                    gap={8}
+                    speed={30}
+                    colors={PIXEL_COLORS}
+                    variant="icon"
+                    noFocus
+                  />
+                  {/* Hover gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-primary/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  <div className="relative z-10 flex flex-col items-center">
+                    {/* Label */}
+                    <p className="text-xs uppercase tracking-widest text-primary/60 font-semibold mb-5">{p.label}</p>
+                    {/* Icon */}
+                    <div className="size-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-105">
+                      <p.icon className="size-6" />
+                    </div>
+                    {/* Text */}
+                    <p className="mt-7 text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors duration-300">
+                      {p.text}
+                    </p>
                   </div>
-                  <p className="mt-8 text-[1.1rem] font-medium text-foreground leading-relaxed max-w-[250px]">{p.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -118,11 +146,14 @@ function AboutPage() {
                 between planning and doing. We partner with founders to ensure ideas are
                 executed and scaled effectively."
               </p>
-              <div className="mt-8 flex items-center gap-4">
-                <div className="size-12 rounded-full bg-hero-gradient" />
+              <div className="mt-10 flex items-center gap-4">
+                {/* Premium initials avatar */}
+                <div className="size-12 rounded-full bg-hero-gradient flex items-center justify-center shrink-0 shadow-md">
+                  <span className="text-sm font-bold text-white tracking-wider select-none">VK</span>
+                </div>
                 <div>
-                  <div className="font-semibold">VIPIN VK</div>
-                  <div className="text-sm text-muted-foreground">FOUNDER & CEO</div>
+                  <div className="font-semibold text-foreground tracking-wide">Vipin VK</div>
+                  <div className="text-xs text-primary font-semibold uppercase tracking-widest mt-0.5">Founder & CEO</div>
                 </div>
               </div>
             </div>
