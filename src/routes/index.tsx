@@ -15,6 +15,7 @@ import { HoverGlow } from "@/components/ui/hover-glow";
 import { ApproachSection } from "@/components/ui/approach-section";
 import TestimonialsEditorial from "@/components/ui/editorial-testimonial";
 import RuixenBentoCards from "@/components/ui/ruixen-bento-cards";
+import { PixelCanvas } from "@/components/ui/pixel-canvas";
 import strategyImg from "@/assets/strategy_planning.png";
 import executionImg from "@/assets/execution_workspace.png";
 import growthImg from "@/assets/growth_momentum.png";
@@ -204,16 +205,25 @@ function HomePage() {
       <ApproachSection />
 
       {/* WHY NAVIK */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
+      <section className="py-24 md:py-32 relative overflow-hidden group/whysection">
         <div className="absolute inset-0 bg-hero-gradient" />
         <div className="absolute inset-0 bg-radial-glow opacity-50" />
-        <div className="container-tight relative">
+        {/* Pixel canvas — covers the whole banner, triggers on section hover */}
+        <PixelCanvas
+          gap={14}
+          speed={20}
+          colors={["#ffffff", "#bfdbfe", "#93c5fd", "#e0e7ff"]}
+          variant="default"
+          noFocus
+          style={{ zIndex: 1 }}
+        />
+        <div className="container-tight relative" style={{ zIndex: 2 }}>
           <Reveal className="max-w-2xl">
             <p className="text-sm uppercase tracking-widest text-primary-foreground/70 font-semibold">Why NaviK</p>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold text-primary-foreground">Built for founders who ship.</h2>
           </Reveal>
         </div>
-        <div className="mt-12 space-y-5 relative">
+        <div className="mt-12 space-y-5 relative" style={{ zIndex: 2 }}>
           <WhyMarquee items={why} />
           <WhyMarquee items={why.slice().reverse()} reverse />
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
+import { PixelCanvas } from "@/components/ui/pixel-canvas";
 
 export interface BentoCardItem {
   title: string;
@@ -9,31 +10,10 @@ export interface BentoCardItem {
   className?: string;
 }
 
-const PlusIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    width={20}
-    height={20}
-    strokeWidth="1.25"
-    stroke="currentColor"
-    className={cn("text-primary size-5", className)}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-  </svg>
-);
+// NaviK brand blue pixel colors — light variants for a subtle shimmer
+const PIXEL_COLORS = ["#c7d2fe", "#a5b4fc", "#818cf8"];
 
-const CornerPlusIcons = () => (
-  <>
-    <PlusIcon className="absolute -top-2.5 -left-2.5" />
-    <PlusIcon className="absolute -top-2.5 -right-2.5" />
-    <PlusIcon className="absolute -bottom-2.5 -left-2.5" />
-    <PlusIcon className="absolute -bottom-2.5 -right-2.5" />
-  </>
-);
-
-const PlusCard: React.FC<BentoCardItem> = ({
+const PixelCard: React.FC<BentoCardItem> = ({
   className = "",
   title,
   description,
@@ -42,20 +22,39 @@ const PlusCard: React.FC<BentoCardItem> = ({
   return (
     <div
       className={cn(
-        "group relative rounded-2xl p-7 min-h-[200px] flex flex-col justify-between bento-dashed",
-        "transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5",
+        "group relative rounded-2xl overflow-hidden",
+        "bg-white border border-border",
+        "shadow-sm hover:shadow-lg",
+        "transition-all duration-300 ease-out hover:-translate-y-1.5",
+        "p-7 min-h-[200px] flex flex-col justify-between",
         className,
       )}
     >
-      <CornerPlusIcons />
+      {/* Pixel canvas animation — fires on hover of the card */}
+      <PixelCanvas
+        gap={8}
+        speed={30}
+        colors={PIXEL_COLORS}
+        variant="default"
+        noFocus
+      />
+
+      {/* Subtle gradient overlay that brightens slightly on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-primary/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+      {/* Card content */}
       <div className="relative z-10 flex flex-col h-full">
-        {Icon ? (
-          <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors mb-5">
+        {Icon && (
+          <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 mb-5 shadow-sm group-hover:shadow-md group-hover:scale-105">
             <Icon className="size-6" />
           </div>
-        ) : null}
-        <h3 className="text-xl font-bold text-foreground">{title}</h3>
-        <p className="mt-3 text-muted-foreground leading-relaxed">{description}</p>
+        )}
+        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+          {title}
+        </h3>
+        <p className="mt-3 text-muted-foreground leading-relaxed text-sm">
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -68,7 +67,7 @@ interface RuixenBentoCardsProps {
 }
 
 export default function RuixenBentoCards({ items, heading, subheading }: RuixenBentoCardsProps) {
-  // Expect 5 items; apply bento spans
+  // Bento layout spans for 5 items: 2 wide on top, 3 equal below
   const spans = [
     "lg:col-span-3 lg:row-span-2",
     "lg:col-span-3 lg:row-span-2",
@@ -78,9 +77,9 @@ export default function RuixenBentoCards({ items, heading, subheading }: RuixenB
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 auto-rows-auto gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 auto-rows-auto gap-4">
       {items.map((item, i) => (
-        <PlusCard key={item.title} {...item} className={spans[i] ?? ""} />
+        <PixelCard key={item.title} {...item} className={spans[i] ?? ""} />
       ))}
       {(heading || subheading) && (
         <div className="sm:col-span-2 lg:col-span-6 max-w-2xl ml-auto text-right mt-2">
