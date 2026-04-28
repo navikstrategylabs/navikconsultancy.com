@@ -119,9 +119,8 @@ function ContactPage() {
                     <div>
                       <div className="text-xs uppercase tracking-widest text-primary-foreground/60">Location</div>
                       <div className="font-medium leading-relaxed">
-                        NaviK Strategy Labs Pvt Ltd<br />
-                        36/267, Ground Floor, Mannath Building,<br />
-                        Seaport-Airport Road, Thrikkakara PO,<br />
+                        36/267, Ground Floor, Mannath Building,
+                         Thrikkakara PO,<br />
                         Ernakulam - 682021
                       </div>
                     </div>
@@ -135,31 +134,31 @@ function ContactPage() {
           <Reveal delay={0.1} className="lg:col-span-8">
             <form
               onSubmit={onSubmit}
-              className="rounded-3xl bg-surface-elevated border border-border p-8 md:p-10 shadow-elegant"
+              className="rounded-3xl bg-surface-elevated border border-border p-8 md:p-10 shadow-[0_1px_4px_rgba(0,0,0,0.04)]"
             >
               <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2 group">
                   <Label htmlFor="name" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Name</Label>
                   <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/40 transition-all duration-200 bg-background">
-                    <Input id="name" name="name" placeholder="Your full name" required maxLength={100} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                    <Input id="name" name="name" placeholder="Your full name" required maxLength={100} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="company" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Company Name</Label>
                   <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
-                    <Input id="company" name="company" placeholder="Company / Brand" maxLength={120} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                    <Input id="company" name="company" placeholder="Company / Brand" maxLength={120} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Email</Label>
                   <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
-                    <Input id="email" name="email" type="email" placeholder="you@company.com" required maxLength={255} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                    <Input id="email" name="email" type="email" placeholder="you@company.com" required maxLength={255} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Phone</Label>
                   <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
-                    <Input id="phone" name="phone" type="tel" placeholder="+91 ..." maxLength={40} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl" />
+                    <Input id="phone" name="phone" type="tel" placeholder="+91 ..." maxLength={40} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -172,7 +171,7 @@ function ContactPage() {
                       rows={6}
                       required
                       maxLength={2000}
-                      className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl resize-none"
+                      className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl resize-none shadow-none"
                     />
                   </div>
                 </div>
