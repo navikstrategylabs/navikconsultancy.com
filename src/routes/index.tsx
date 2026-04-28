@@ -12,11 +12,11 @@ import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-
 import { InfiniteGrid } from "@/components/ui/the-infinite-grid";
 import { HoverGlow } from "@/components/ui/hover-glow";
 import { ApproachSection } from "@/components/ui/approach-section";
-import TestimonialsEditorial from "@/components/ui/editorial-testimonial";
+import { UniqueTestimonials } from "@/components/ui/unique-testimonial";
 import RuixenBentoCards from "@/components/ui/ruixen-bento-cards";
 import { PixelCanvas } from "@/components/ui/pixel-canvas";
 import strategyImg from "@/assets/strategy_planning.png";
-import executionImg from "@/assets/execution_workspace.png";
+import executionImg from "@/assets/execution_workspace.jpeg";
 import growthImg from "@/assets/growth_momentum.png";
 
 export const Route = createFileRoute("/")({
@@ -240,16 +240,14 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-20 md:py-32 relative">
+      <section className="py-12 md:py-16 relative">
         <div className="container-tight">
           <Reveal>
-            <div className="text-center mb-12">
+            <div className="text-center mb-4">
               <p className="text-sm uppercase tracking-widest text-primary font-semibold">Client Voices</p>
               <h2 className="mt-3 text-4xl md:text-5xl font-bold">What our partners say.</h2>
             </div>
-            <div className="max-w-4xl mx-auto rounded-3xl bg-surface-elevated border border-border/50 shadow-elegant">
-              <TestimonialsEditorial />
-            </div>
+            <UniqueTestimonials />
           </Reveal>
         </div>
       </section>

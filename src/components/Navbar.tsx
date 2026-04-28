@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/navik-logo.png";
-import { Button } from "@/components/ui/button";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 const links = [
@@ -18,7 +17,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -27,53 +26,60 @@ export function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-2" : "py-4"
+        scrolled
+          ? "bg-white/75 backdrop-blur-xl border-b border-border/40 shadow-sm"
+          : "bg-white/50 backdrop-blur-md border-b border-transparent"
       }`}
     >
-      <div className="container-tight">
-        <nav
-          className={`flex items-center justify-between rounded-2xl px-4 md:px-6 py-3 transition-all duration-500 ${
-            scrolled
-              ? "glass shadow-elegant"
-              : "bg-white/40 backdrop-blur-md border border-border/30 shadow-sm"
-          }`}
-        >
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src={logo} alt="NaviK Strategy Labs" className="h-12 md:h-14 w-auto" />
-          </Link>
+      {/* Desktop nav */}
+      <div className="container-tight flex items-center justify-between h-16 md:h-18">
+        {/* Logo */}
+        <Link to="/" className="flex items-center shrink-0">
+          <img src={logo} alt="NaviK Strategy Labs" className="h-11 md:h-13 w-auto" />
+        </Link>
 
-          <ul className="hidden md:flex items-center gap-1">
-            {links.map((l) => (
-              <li key={l.to}>
-                <Link
-                  to={l.to}
-                  className="relative px-4 py-2 rounded-lg text-sm font-medium text-foreground/75 hover:text-primary transition-colors after:absolute after:bottom-1.5 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-out"
-                  activeProps={{ className: "text-primary after:scale-x-100" }}
-                  activeOptions={{ exact: l.to === "/" }}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        {/* Links */}
+        <ul className="hidden md:flex items-center gap-1">
+          {links.map((l) => (
+            <li key={l.to}>
+              <Link
+                to={l.to}
+                className="relative px-4 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-primary transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-out"
+                activeProps={{ className: "text-primary after:scale-x-100" }}
+                activeOptions={{ exact: l.to === "/" }}
+              >
+                {l.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-          <div className="hidden md:block">
-            <a href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs" target="_blank" rel="noopener noreferrer" className={getStartedClasses("primary", "h-11 text-sm pl-5 pr-12")}>
-              <GetStartedInner label="Book a Consultation" variant="primary" />
-            </a>
-          </div>
-
-          <button
-            className="md:hidden p-2 rounded-lg text-foreground"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
+        {/* CTA */}
+        <div className="hidden md:block">
+          <a
+            href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={getStartedClasses("primary", "h-10 text-sm pl-5 pr-11")}
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </nav>
+            <GetStartedInner label="Book a Consultation" variant="primary" />
+          </a>
+        </div>
 
-        {open && (
-          <div className="md:hidden mt-2 glass rounded-2xl p-4 shadow-elegant animate-fade-up">
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden p-2 rounded-lg text-foreground hover:bg-secondary/50 transition-colors"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
+      </div>
+
+      {/* Mobile drawer — full-width, below the header bar */}
+      {open && (
+        <div className="md:hidden border-t border-border/30 bg-white/90 backdrop-blur-xl animate-fade-up">
+          <div className="container-tight py-4">
             <ul className="flex flex-col gap-1">
               {links.map((l) => (
                 <li key={l.to}>
@@ -88,20 +94,20 @@ export function Navbar() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
+              <li className="pt-3 border-t border-border/30 mt-2">
                 <a
                   href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={getStartedClasses("primary", "w-full justify-start")}
+                  className={getStartedClasses("primary", "w-full justify-center")}
                 >
                   <GetStartedInner label="Book a Consultation" variant="primary" />
                 </a>
               </li>
             </ul>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 }

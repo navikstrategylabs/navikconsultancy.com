@@ -23,8 +23,8 @@ const PixelCard: React.FC<BentoCardItem> = ({
     <div
       className={cn(
         "group relative rounded-2xl overflow-hidden",
-        "bg-white border border-border",
-        "shadow-sm hover:shadow-lg",
+        "bg-white border border-border/60",
+        "shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.07)]",
         "transition-all duration-300 ease-out hover:-translate-y-1.5",
         "p-7 min-h-[200px] flex flex-col justify-between",
         className,
