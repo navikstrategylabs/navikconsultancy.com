@@ -44,7 +44,7 @@ function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <Reveal>
               <p className="text-xl text-foreground leading-relaxed">
-                NaviK Strategy Labs was founded with a simple belief — businesses don't fail
+                NaviK Strategy Labs was founded with a simple belief - businesses don't fail
                 due to lack of ideas, but due to lack of clarity and execution.
               </p>
             </Reveal>
@@ -95,11 +95,11 @@ function AboutPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {philosophy.map((p, i) => (
               <Reveal key={p.text} delay={i * 0.08}>
-                <div className="h-full rounded-2xl bg-surface-elevated border border-border p-8 hover-lift text-center">
-                  <div className="mx-auto size-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
-                    <p.icon className="size-7" />
+                <div className="h-full rounded-[2rem] bg-surface-elevated border border-border/60 p-10 md:p-12 hover-lift text-center shadow-sm flex flex-col items-center justify-center">
+                  <div className="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center ring-8 ring-primary/5">
+                    <p.icon className="size-6" />
                   </div>
-                  <p className="mt-6 text-xl font-display font-semibold leading-snug">{p.text}</p>
+                  <p className="mt-8 text-[1.1rem] font-medium text-foreground leading-relaxed max-w-[250px]">{p.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -114,15 +114,15 @@ function AboutPage() {
             <div className="relative max-w-4xl mx-auto rounded-3xl bg-surface-elevated border border-border p-10 md:p-16 shadow-elegant">
               <Quote className="absolute -top-6 left-10 size-14 text-primary bg-background rounded-full p-3 shadow-elegant" />
               <p className="text-2xl md:text-3xl font-display leading-snug text-foreground">
-                "NaviK is built to solve one of the biggest gaps in business — the disconnect
+                "Navik is built to solve one of the biggest gaps in business - the disconnect
                 between planning and doing. We partner with founders to ensure ideas are
                 executed and scaled effectively."
               </p>
               <div className="mt-8 flex items-center gap-4">
                 <div className="size-12 rounded-full bg-hero-gradient" />
                 <div>
-                  <div className="font-semibold">Founder's Note</div>
-                  <div className="text-sm text-muted-foreground">NaviK Strategy Labs</div>
+                  <div className="font-semibold">VIPIN VK</div>
+                  <div className="text-sm text-muted-foreground">FOUNDER & CEO</div>
                 </div>
               </div>
             </div>

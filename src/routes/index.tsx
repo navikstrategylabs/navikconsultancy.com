@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 import { InfiniteGrid } from "@/components/ui/the-infinite-grid";
 import { HoverGlow } from "@/components/ui/hover-glow";
+import { ApproachSection } from "@/components/ui/approach-section";
+import TestimonialsEditorial from "@/components/ui/editorial-testimonial";
 import RuixenBentoCards from "@/components/ui/ruixen-bento-cards";
 import strategyImg from "@/assets/strategy_planning.png";
 import executionImg from "@/assets/execution_workspace.png";
@@ -145,15 +147,7 @@ function HomePage() {
               <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Our approach combines strategic thinking with hands-on execution to deliver measurable outcomes.
               </p>
-              <div className="mt-10 flex items-center gap-6">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="size-10 rounded-full border-2 border-background bg-surface-elevated flex items-center justify-center overflow-hidden">
-                      <div className="size-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">NSL</div>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground font-medium">Trusted by 50+ founders</p>
+              <div className="mt-10 flex items-center gap-6"> 
               </div>
             </Reveal>
 
@@ -207,33 +201,7 @@ function HomePage() {
       </section>
 
       {/* OUR APPROACH */}
-      <section className="py-24 md:py-32">
-        <div className="container-tight">
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
-            <Reveal className="lg:col-span-5">
-              <p className="text-sm uppercase tracking-widest text-primary font-semibold">Our Approach</p>
-              <h2 className="mt-3 text-4xl md:text-5xl font-bold leading-tight">
-                A discipline that <span className="text-gradient">turns ideas</span> into outcomes.
-              </h2>
-            </Reveal>
-            <div className="lg:col-span-7 space-y-5">
-              {approach.map((a, i) => (
-                <Reveal key={a.title} delay={i * 0.08}>
-                  <div className="flex gap-5 rounded-2xl p-6 bg-surface border border-border hover-lift">
-                    <div className="text-5xl font-display font-bold text-gradient leading-none shrink-0">
-                      0{i + 1}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold">{a.title}</h3>
-                      <p className="mt-1 text-muted-foreground">{a.desc}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ApproachSection />
 
       {/* WHY NAVIK */}
       <section className="py-24 md:py-32 relative overflow-hidden">
@@ -251,19 +219,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PARTNER LOGOS */}
-      <section className="py-20 md:py-24">
-        <div className="container-tight mb-10">
-          <Reveal>
-            <p className="text-sm uppercase tracking-widest text-primary font-semibold text-center">Partners & Ecosystem</p>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold text-center">Working alongside the world's leading platforms.</h2>
-          </Reveal>
-        </div>
-        <div className="space-y-6">
-          <LogoMarquee items={partners} />
-          <LogoMarquee items={partners.slice().reverse()} reverse />
-        </div>
-      </section>
 
       {/* TRUSTED BY LOGOS */}
       <section className="py-20 md:py-32 bg-surface">
@@ -274,6 +229,21 @@ function HomePage() {
           </Reveal>
         </div>
         <TrustedLogosMarquee />
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-20 md:py-32 relative">
+        <div className="container-tight">
+          <Reveal>
+            <div className="text-center mb-12">
+              <p className="text-sm uppercase tracking-widest text-primary font-semibold">Client Voices</p>
+              <h2 className="mt-3 text-4xl md:text-5xl font-bold">What our partners say.</h2>
+            </div>
+            <div className="max-w-4xl mx-auto rounded-3xl bg-surface-elevated border border-border/50 shadow-elegant">
+              <TestimonialsEditorial />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* CTA */}
@@ -321,15 +291,6 @@ function HomePage() {
                   >
                     <GetStartedInner label="Book Your Free Consultation" variant="onDark" />
                   </a>
-                </div>
-                
-                <div className="mt-6 flex items-center justify-center gap-6 text-sm text-white/50 font-medium">
-                  <span className="flex items-center gap-2">
-                    <CheckCircle2 className="size-4 text-white/70" /> No commitment required
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <CheckCircle2 className="size-4 text-white/70" /> 30-minute discovery call
-                  </span>
                 </div>
               </div>
             </HoverGlow>

@@ -37,7 +37,7 @@ export function Navbar() {
           }`}
         >
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src={logo} alt="NaviK Strategy Labs" className="h-9 md:h-10 w-auto" />
+            <img src={logo} alt="NaviK Strategy Labs" className="h-12 md:h-14 w-auto" />
           </Link>
 
           <ul className="hidden md:flex items-center gap-1">

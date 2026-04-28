@@ -73,15 +73,19 @@ function ServicesPage() {
         <div className="container-tight space-y-6">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.04}>
-              <div className="group rounded-3xl bg-surface-elevated border border-border p-8 md:p-12 hover-lift">
-                <div className="grid md:grid-cols-12 gap-8 items-start">
+              <div className="group rounded-3xl bg-surface-elevated border border-border p-8 md:p-12 hover-lift relative overflow-hidden">
+                {/* Giant faded background number */}
+                <div className="absolute -left-8 md:-left-12 -bottom-8 md:-bottom-12 text-[12rem] md:text-[18rem] font-bold text-primary/[0.06] select-none pointer-events-none leading-none tracking-tighter z-0 transition-transform duration-700 group-hover:scale-105">
+                  0{i + 1}
+                </div>
+                
+                <div className="grid md:grid-cols-12 gap-8 items-start relative z-10">
                   <div className="md:col-span-1">
-                    <div className="size-14 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-elegant">
+                    <div className="size-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-elegant">
                       <s.icon className="size-7" />
                     </div>
                   </div>
                   <div className="md:col-span-5">
-                    <div className="text-xs font-mono uppercase tracking-widest text-primary/70">0{i + 1}</div>
                     <h2 className="mt-2 text-3xl md:text-4xl font-bold leading-tight">{s.title}</h2>
                     <p className="mt-4 text-lg text-muted-foreground leading-relaxed">{s.short}</p>
                   </div>

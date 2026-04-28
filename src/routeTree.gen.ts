@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as TestimonialDemoRouteImport } from './routes/testimonial-demo'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as EditorialDemoRouteImport } from './routes/editorial-demo'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -20,9 +22,19 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestimonialDemoRoute = TestimonialDemoRouteImport.update({
+  id: '/testimonial-demo',
+  path: '/testimonial-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EditorialDemoRoute = EditorialDemoRouteImport.update({
+  id: '/editorial-demo',
+  path: '/editorial-demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -45,14 +57,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/editorial-demo': typeof EditorialDemoRoute
   '/services': typeof ServicesRoute
+  '/testimonial-demo': typeof TestimonialDemoRoute
   '/work': typeof WorkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/editorial-demo': typeof EditorialDemoRoute
   '/services': typeof ServicesRoute
+  '/testimonial-demo': typeof TestimonialDemoRoute
   '/work': typeof WorkRoute
 }
 export interface FileRoutesById {
@@ -60,22 +76,48 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/editorial-demo': typeof EditorialDemoRoute
   '/services': typeof ServicesRoute
+  '/testimonial-demo': typeof TestimonialDemoRoute
   '/work': typeof WorkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/services' | '/work'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/editorial-demo'
+    | '/services'
+    | '/testimonial-demo'
+    | '/work'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/services' | '/work'
-  id: '__root__' | '/' | '/about' | '/contact' | '/services' | '/work'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/editorial-demo'
+    | '/services'
+    | '/testimonial-demo'
+    | '/work'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/editorial-demo'
+    | '/services'
+    | '/testimonial-demo'
+    | '/work'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  EditorialDemoRoute: typeof EditorialDemoRoute
   ServicesRoute: typeof ServicesRoute
+  TestimonialDemoRoute: typeof TestimonialDemoRoute
   WorkRoute: typeof WorkRoute
 }
 
@@ -88,11 +130,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/testimonial-demo': {
+      id: '/testimonial-demo'
+      path: '/testimonial-demo'
+      fullPath: '/testimonial-demo'
+      preLoaderRoute: typeof TestimonialDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/editorial-demo': {
+      id: '/editorial-demo'
+      path: '/editorial-demo'
+      fullPath: '/editorial-demo'
+      preLoaderRoute: typeof EditorialDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -123,7 +179,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  EditorialDemoRoute: EditorialDemoRoute,
   ServicesRoute: ServicesRoute,
+  TestimonialDemoRoute: TestimonialDemoRoute,
   WorkRoute: WorkRoute,
 }
 export const routeTree = rootRouteImport

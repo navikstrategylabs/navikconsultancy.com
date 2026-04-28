@@ -4,6 +4,8 @@ import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 export const Route = createFileRoute("/work")({
   head: () => ({
     meta: [
@@ -70,9 +72,9 @@ function WorkPage() {
         <div className="container-tight grid gap-6 md:grid-cols-2">
           {cases.map((c, i) => (
             <Reveal key={c.client} delay={i * 0.06}>
-              <article className="group h-full rounded-3xl bg-surface-elevated border border-border p-8 md:p-10 hover-lift relative overflow-hidden">
+              <article className="group h-full rounded-3xl bg-surface-elevated border border-border p-8 md:p-10 hover-lift relative overflow-hidden flex flex-col">
                 <div className="absolute -top-24 -right-24 size-56 rounded-full bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-                <div className="relative">
+                <div className="relative flex-1 flex flex-col">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-xs font-mono uppercase tracking-widest text-primary">{c.sector}</div>
@@ -83,19 +85,37 @@ function WorkPage() {
                     </div>
                   </div>
 
-                  <div className="mt-8 space-y-5">
-                    <div>
-                      <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Problem</div>
-                      <p className="mt-1.5 text-foreground/90 leading-relaxed">{c.problem}</p>
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Approach</div>
-                      <p className="mt-1.5 text-foreground/90 leading-relaxed">{c.approach}</p>
-                    </div>
-                    <div className="rounded-2xl bg-primary/5 border border-primary/10 p-5">
-                      <div className="text-xs font-semibold uppercase tracking-widest text-primary">Outcome</div>
-                      <p className="mt-1.5 text-foreground font-medium leading-relaxed">{c.outcome}</p>
-                    </div>
+                  <div className="mt-8 flex-1">
+                    <Accordion type="single" collapsible defaultValue="problem" className="w-full">
+                      <AccordionItem value="problem" className="border-border/50">
+                        <AccordionTrigger className="text-xs font-semibold uppercase tracking-widest text-muted-foreground hover:no-underline py-3">
+                          Problem
+                        </AccordionTrigger>
+                        <AccordionContent className="text-foreground/90 leading-relaxed text-base">
+                          {c.problem}
+                        </AccordionContent>
+                      </AccordionItem>
+                      
+                      <AccordionItem value="approach" className="border-border/50">
+                        <AccordionTrigger className="text-xs font-semibold uppercase tracking-widest text-muted-foreground hover:no-underline py-3">
+                          Approach
+                        </AccordionTrigger>
+                        <AccordionContent className="text-foreground/90 leading-relaxed text-base">
+                          {c.approach}
+                        </AccordionContent>
+                      </AccordionItem>
+                      
+                      <AccordionItem value="outcome" className="border-b-0">
+                        <AccordionTrigger className="text-xs font-semibold uppercase tracking-widest text-primary hover:no-underline py-3">
+                          Outcome
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="rounded-2xl bg-primary/5 border border-primary/10 p-4 mt-2">
+                            <p className="text-foreground font-medium leading-relaxed text-base">{c.outcome}</p>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </div>
                 </div>
               </article>
