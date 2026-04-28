@@ -29,14 +29,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { title: "NaviK Strategy Labs" },
       { name: "description", content: "NaviK Strategy Labs partners with startups and growing businesses to bring clarity, structure, and momentum to growth." },
       { name: "author", content: "NaviK Strategy Labs" },
-      { property: "og:title", content: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { property: "og:title", content: "NaviK Strategy Labs" },
       { property: "og:description", content: "NaviK Strategy Labs partners with startups and growing businesses to bring clarity, structure, and momentum to growth." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { name: "twitter:title", content: "NaviK Strategy Labs" },
       { name: "twitter:description", content: "NaviK Strategy Labs partners with startups and growing businesses to bring clarity, structure, and momentum to growth." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/14ca946c-0c9f-4bd9-85fd-8ba4ca982be4/id-preview-3daddc6e--39b2cca2-a4f4-4d27-950f-5a8f4ce2f8df.lovable.app-1776868304971.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/14ca946c-0c9f-4bd9-85fd-8ba4ca982be4/id-preview-3daddc6e--39b2cca2-a4f4-4d27-950f-5a8f4ce2f8df.lovable.app-1776868304971.png" },
@@ -55,15 +55,9 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
+    <>
+      {children}
+    </>
   );
 }
 
