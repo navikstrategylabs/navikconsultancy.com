@@ -23,13 +23,23 @@ const PixelCard: React.FC<BentoCardItem> = ({
     <div
       className={cn(
         "group relative rounded-2xl overflow-hidden",
-        "bg-white/80 backdrop-blur-sm border border-border/60",
+        "bg-white border border-border/60",
         "shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.1)]",
         "transition-all duration-500 ease-out hover:-translate-y-2",
         "p-7 min-h-[220px] flex flex-col justify-between",
         className,
       )}
     >
+      {/* Pixel canvas animation — now inside the card but using global coordinates */}
+      <PixelCanvas
+        gap={8}
+        speed={25}
+        colors={PIXEL_COLORS}
+        variant="default"
+        noFocus
+        useGlobalMouse
+      />
+
       {/* Subtle gradient overlay that brightens slightly on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.05] via-transparent to-primary/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -58,6 +68,41 @@ interface RuixenBentoCardsProps {
 }
 
 export default function RuixenBentoCards({ items, heading, subheading }: RuixenBentoCardsProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    containerRef.current.style.setProperty("--mouse-x", `${(e.clientX - rect.left) * (window.devicePixelRatio || 1)}px`);
+    containerRef.current.style.setProperty("--mouse-y", `${(e.clientY - rect.top) * (window.devicePixelRatio || 1)}px`);
+  };
+
+  const handleMouseLeave = () => {
+    if (!containerRef.current) return;
+    containerRef.current.style.removeProperty("--mouse-x");
+    containerRef.current.style.removeProperty("--mouse-y");
+  };
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth > 768 || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      if (rect.top < viewportHeight && rect.bottom > 0) {
+        const centerInViewport = viewportHeight / 2;
+        const relativeY = (centerInViewport - rect.top) * (window.devicePixelRatio || 1);
+        const relativeX = (rect.width / 2) * (window.devicePixelRatio || 1);
+        
+        containerRef.current.style.setProperty("--mouse-x", `${relativeX}px`);
+        containerRef.current.style.setProperty("--mouse-y", `${relativeY}px`);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Bento layout spans for 5 items: 2 wide on top, 3 equal below
   const spans = [
     "lg:col-span-3 lg:row-span-2",
@@ -68,17 +113,12 @@ export default function RuixenBentoCards({ items, heading, subheading }: RuixenB
   ];
 
   return (
-    <div className="relative group/bento p-1 isolate">
-      {/* Shared Pixel canvas animation — tracks the whole grid area */}
-      <PixelCanvas
-        gap={10}
-        speed={25}
-        colors={["#4f46e5", "#4338ca", "#3730a3", "#312e81"]}
-        variant="default"
-        noFocus
-        className="-z-10"
-      />
-
+    <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative group/bento p-1 isolate"
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 auto-rows-auto gap-4 relative z-10">
         {items.map((item, i) => (
           <PixelCard key={item.title} {...item} className={spans[i] ?? ""} />

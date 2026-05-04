@@ -179,6 +179,10 @@ class PixelCanvasElement extends HTMLElement {
     return this.dataset.variant || "default"
   }
 
+  get useGlobalMouse() {
+    return this.hasAttribute("data-use-global-mouse")
+  }
+
   connectedCallback() {
     if (this._initialized) return
     this._initialized = true
@@ -308,6 +312,36 @@ class PixelCanvasElement extends HTMLElement {
       if (!this.ctx) return
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
       let allIdle = true
+      
+      if (this.useGlobalMouse) {
+        const style = getComputedStyle(this)
+        const mx = style.getPropertyValue("--mouse-x")
+        const my = style.getPropertyValue("--mouse-y")
+        
+        if (mx && my) {
+          // The CSS vars are relative to the bento container.
+          // We need them relative to THIS canvas.
+          const rect = this.canvas.getBoundingClientRect()
+          const bentoRect = (this.closest('.group\\/bento') as HTMLElement)?.getBoundingClientRect()
+          
+          if (bentoRect) {
+            const dpr = window.devicePixelRatio || 1
+            const globalX = parseFloat(mx)
+            const globalY = parseFloat(my)
+            
+            // Offset from bento top-left to this canvas top-left
+            const offsetX = (rect.left - bentoRect.left) * dpr
+            const offsetY = (rect.top - bentoRect.top) * dpr
+            
+            this.mouseX = globalX - offsetX
+            this.mouseY = globalY - offsetY
+          }
+        } else {
+          this.mouseX = undefined
+          this.mouseY = undefined
+        }
+      }
+
       for (const pixel of this.pixels) {
         if (name === "appear") {
           pixel.appear(this.mouseX, this.mouseY)
@@ -333,6 +367,7 @@ export interface PixelCanvasProps extends React.HTMLAttributes<HTMLElement> {
   colors?: string[]
   variant?: "default" | "icon"
   noFocus?: boolean
+  useGlobalMouse?: boolean
 }
 
 declare global {
@@ -350,7 +385,7 @@ declare global {
 }
 
 const PixelCanvas = React.forwardRef<HTMLElement, PixelCanvasProps>(
-  ({ gap, speed, colors, variant, noFocus, style, ...props }, ref) => {
+  ({ gap, speed, colors, variant, noFocus, useGlobalMouse, style, ...props }, ref) => {
     React.useEffect(() => {
       if (typeof window !== "undefined") {
         if (!customElements.get("pixel-canvas")) {
@@ -367,6 +402,7 @@ const PixelCanvas = React.forwardRef<HTMLElement, PixelCanvasProps>(
         data-colors={colors?.join(",")}
         data-variant={variant}
         {...(noFocus && { "data-no-focus": "" })}
+        {...(useGlobalMouse && { "data-use-global-mouse": "" })}
         style={{
           position: "absolute",
           inset: 0,
