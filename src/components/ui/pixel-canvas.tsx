@@ -19,6 +19,7 @@ class Pixel {
   isIdle: boolean
   isReverse: boolean
   isShimmer: boolean
+  radius: number = 250
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -38,8 +39,8 @@ class Pixel {
     this.speed = this.getRandomValue(0.1, 0.9) * speed
     this.size = 0
     this.sizeStep = Math.random() * 0.4
-    this.minSize = 0.5
-    this.maxSizeInteger = 2
+    this.minSize = 1
+    this.maxSizeInteger = 6
     this.maxSize = this.getRandomValue(this.minSize, this.maxSizeInteger)
     this.delay = delay
     this.counter = 0
@@ -64,8 +65,23 @@ class Pixel {
     )
   }
 
-  appear() {
+  appear(mouseX?: number, mouseY?: number) {
     this.isIdle = false
+
+    if (mouseX === undefined || mouseY === undefined) {
+      this.disappear()
+      return
+    }
+
+    const dx = this.x - mouseX
+    const dy = this.y - mouseY
+    const distance = Math.sqrt(dx * dx + dy * dy)
+    
+    if (distance > this.radius) {
+      this.disappear()
+      return
+    }
+
     if (this.counter <= this.delay) {
       this.counter += this.counterStep
       return
@@ -88,7 +104,7 @@ class Pixel {
       this.isIdle = true
       return
     } else {
-      this.size -= 0.1
+      this.size -= 0.5
     }
     this.draw()
   }
@@ -118,6 +134,8 @@ class PixelCanvasElement extends HTMLElement {
   private _initialized: boolean = false
   private _resizeObserver: ResizeObserver | null = null
   private _parent: Element | null = null
+  private mouseX: number | undefined = undefined
+  private mouseY: number | undefined = undefined
 
   constructor() {
     super()
@@ -177,7 +195,38 @@ class PixelCanvasElement extends HTMLElement {
     })
 
     this._parent?.addEventListener("mouseenter", () => this.handleAnimation("appear"))
-    this._parent?.addEventListener("mouseleave", () => this.handleAnimation("disappear"))
+    this._parent?.addEventListener("mouseleave", () => {
+      this.mouseX = undefined
+      this.mouseY = undefined
+      this.handleAnimation("disappear")
+    })
+    this._parent?.addEventListener("mousemove", (e: any) => {
+      const rect = this.canvas.getBoundingClientRect()
+      this.mouseX = (e.clientX - rect.left) * (window.devicePixelRatio || 1)
+      this.mouseY = (e.clientY - rect.top) * (window.devicePixelRatio || 1)
+      if (!this.animation) this.handleAnimation("appear")
+    })
+
+    // Mobile scroll effect — tracks the middle of the screen
+    const onScroll = () => {
+      if (window.innerWidth > 768) return
+      const rect = this.canvas.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      
+      // If the canvas is in view
+      if (rect.top < viewportHeight && rect.bottom > 0) {
+        // Find the center point of the viewport relative to the canvas
+        const centerInViewport = viewportHeight / 2
+        const relativeY = (centerInViewport - rect.top) * (window.devicePixelRatio || 1)
+        const relativeX = (rect.width / 2) * (window.devicePixelRatio || 1)
+        
+        this.mouseX = relativeX
+        this.mouseY = relativeY
+        if (!this.animation) this.handleAnimation("appear")
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
 
     if (!this.noFocus) {
       this._parent?.addEventListener("focus", () => this.handleAnimation("appear"), { capture: true })
@@ -260,7 +309,11 @@ class PixelCanvasElement extends HTMLElement {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
       let allIdle = true
       for (const pixel of this.pixels) {
-        pixel[name]()
+        if (name === "appear") {
+          pixel.appear(this.mouseX, this.mouseY)
+        } else {
+          pixel.disappear()
+        }
         if (!pixel.isIdle) allIdle = false
       }
       if (allIdle) {
