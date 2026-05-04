@@ -19,7 +19,6 @@ class Pixel {
   isIdle: boolean
   isReverse: boolean
   isShimmer: boolean
-  radius: number = 250
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -39,8 +38,8 @@ class Pixel {
     this.speed = this.getRandomValue(0.1, 0.9) * speed
     this.size = 0
     this.sizeStep = Math.random() * 0.4
-    this.minSize = 1
-    this.maxSizeInteger = 6
+    this.minSize = 0.5
+    this.maxSizeInteger = 2
     this.maxSize = this.getRandomValue(this.minSize, this.maxSizeInteger)
     this.delay = delay
     this.counter = 0
@@ -65,23 +64,8 @@ class Pixel {
     )
   }
 
-  appear(mouseX?: number, mouseY?: number) {
+  appear() {
     this.isIdle = false
-
-    if (mouseX === undefined || mouseY === undefined) {
-      this.disappear()
-      return
-    }
-
-    const dx = this.x - mouseX
-    const dy = this.y - mouseY
-    const distance = Math.sqrt(dx * dx + dy * dy)
-    
-    if (distance > this.radius) {
-      this.disappear()
-      return
-    }
-
     if (this.counter <= this.delay) {
       this.counter += this.counterStep
       return
@@ -104,7 +88,7 @@ class Pixel {
       this.isIdle = true
       return
     } else {
-      this.size -= 0.5
+      this.size -= 0.1
     }
     this.draw()
   }
@@ -134,8 +118,6 @@ class PixelCanvasElement extends HTMLElement {
   private _initialized: boolean = false
   private _resizeObserver: ResizeObserver | null = null
   private _parent: Element | null = null
-  private mouseX: number | undefined = undefined
-  private mouseY: number | undefined = undefined
 
   constructor() {
     super()
@@ -179,10 +161,6 @@ class PixelCanvasElement extends HTMLElement {
     return this.dataset.variant || "default"
   }
 
-  get useGlobalMouse() {
-    return this.hasAttribute("data-use-global-mouse")
-  }
-
   connectedCallback() {
     if (this._initialized) return
     this._initialized = true
@@ -199,38 +177,7 @@ class PixelCanvasElement extends HTMLElement {
     })
 
     this._parent?.addEventListener("mouseenter", () => this.handleAnimation("appear"))
-    this._parent?.addEventListener("mouseleave", () => {
-      this.mouseX = undefined
-      this.mouseY = undefined
-      this.handleAnimation("disappear")
-    })
-    this._parent?.addEventListener("mousemove", (e: any) => {
-      const rect = this.canvas.getBoundingClientRect()
-      this.mouseX = (e.clientX - rect.left) * (window.devicePixelRatio || 1)
-      this.mouseY = (e.clientY - rect.top) * (window.devicePixelRatio || 1)
-      if (!this.animation) this.handleAnimation("appear")
-    })
-
-    // Mobile scroll effect — tracks the middle of the screen
-    const onScroll = () => {
-      if (window.innerWidth > 768) return
-      const rect = this.canvas.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-      
-      // If the canvas is in view
-      if (rect.top < viewportHeight && rect.bottom > 0) {
-        // Find the center point of the viewport relative to the canvas
-        const centerInViewport = viewportHeight / 2
-        const relativeY = (centerInViewport - rect.top) * (window.devicePixelRatio || 1)
-        const relativeX = (rect.width / 2) * (window.devicePixelRatio || 1)
-        
-        this.mouseX = relativeX
-        this.mouseY = relativeY
-        if (!this.animation) this.handleAnimation("appear")
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true })
+    this._parent?.addEventListener("mouseleave", () => this.handleAnimation("disappear"))
 
     if (!this.noFocus) {
       this._parent?.addEventListener("focus", () => this.handleAnimation("appear"), { capture: true })
@@ -312,42 +259,8 @@ class PixelCanvasElement extends HTMLElement {
       if (!this.ctx) return
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
       let allIdle = true
-      
-      if (this.useGlobalMouse) {
-        const style = getComputedStyle(this)
-        const mx = style.getPropertyValue("--mouse-x")
-        const my = style.getPropertyValue("--mouse-y")
-        
-        if (mx && my) {
-          // The CSS vars are relative to the bento container.
-          // We need them relative to THIS canvas.
-          const rect = this.canvas.getBoundingClientRect()
-          const bentoRect = (this.closest('.group\\/bento') as HTMLElement)?.getBoundingClientRect()
-          
-          if (bentoRect) {
-            const dpr = window.devicePixelRatio || 1
-            const globalX = parseFloat(mx)
-            const globalY = parseFloat(my)
-            
-            // Offset from bento top-left to this canvas top-left
-            const offsetX = (rect.left - bentoRect.left) * dpr
-            const offsetY = (rect.top - bentoRect.top) * dpr
-            
-            this.mouseX = globalX - offsetX
-            this.mouseY = globalY - offsetY
-          }
-        } else {
-          this.mouseX = undefined
-          this.mouseY = undefined
-        }
-      }
-
       for (const pixel of this.pixels) {
-        if (name === "appear") {
-          pixel.appear(this.mouseX, this.mouseY)
-        } else {
-          pixel.disappear()
-        }
+        pixel[name]()
         if (!pixel.isIdle) allIdle = false
       }
       if (allIdle) {
@@ -367,7 +280,6 @@ export interface PixelCanvasProps extends React.HTMLAttributes<HTMLElement> {
   colors?: string[]
   variant?: "default" | "icon"
   noFocus?: boolean
-  useGlobalMouse?: boolean
 }
 
 declare global {
@@ -385,7 +297,7 @@ declare global {
 }
 
 const PixelCanvas = React.forwardRef<HTMLElement, PixelCanvasProps>(
-  ({ gap, speed, colors, variant, noFocus, useGlobalMouse, style, ...props }, ref) => {
+  ({ gap, speed, colors, variant, noFocus, style, ...props }, ref) => {
     React.useEffect(() => {
       if (typeof window !== "undefined") {
         if (!customElements.get("pixel-canvas")) {
@@ -402,7 +314,6 @@ const PixelCanvas = React.forwardRef<HTMLElement, PixelCanvasProps>(
         data-colors={colors?.join(",")}
         data-variant={variant}
         {...(noFocus && { "data-no-focus": "" })}
-        {...(useGlobalMouse && { "data-use-global-mouse": "" })}
         style={{
           position: "absolute",
           inset: 0,
