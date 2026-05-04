@@ -2,6 +2,8 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 
+
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -38,13 +40,17 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "NaviK Strategy Labs" },
       { name: "twitter:description", content: "NaviK Strategy Labs partners with startups and growing businesses to bring clarity, structure, and momentum to growth." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/14ca946c-0c9f-4bd9-85fd-8ba4ca982be4/id-preview-3daddc6e--39b2cca2-a4f4-4d27-950f-5a8f4ce2f8df.lovable.app-1776868304971.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/14ca946c-0c9f-4bd9-85fd-8ba4ca982be4/id-preview-3daddc6e--39b2cca2-a4f4-4d27-950f-5a8f4ce2f8df.lovable.app-1776868304971.png" },
+
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        href: "/favicon.png",
       },
     ],
   }),

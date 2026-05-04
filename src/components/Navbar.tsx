@@ -1,7 +1,8 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/navik-logo.png";
+import logoBlue from "@/assets/navik-logo.png";
+import logoWhite from "@/assets/navik_white_logo.png";
 import { GetStartedInner, getStartedClasses } from "@/components/ui/get-started-button";
 
 const links = [
@@ -15,9 +16,12 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const showDarkNavbar = isHome && !scrolled;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -27,15 +31,21 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/75 backdrop-blur-xl border-b border-border/40 shadow-sm"
-          : "bg-white/50 backdrop-blur-md border-b border-transparent"
+          ? "bg-white/80 backdrop-blur-xl border-b border-border/40 shadow-sm py-0"
+          : showDarkNavbar
+          ? "bg-transparent border-b border-transparent py-2"
+          : "bg-white/50 backdrop-blur-md border-b border-transparent py-1"
       }`}
     >
       {/* Desktop nav */}
-      <div className="container-tight flex items-center justify-between h-16 md:h-18">
+      <div className="container-tight flex items-center justify-between h-20 md:h-22 transition-all duration-500">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">
-          <img src={logo} alt="NaviK Strategy Labs" className="h-11 md:h-13 w-auto" />
+          <img 
+            src={showDarkNavbar ? logoWhite : logoBlue} 
+            alt="NaviK Strategy Labs" 
+            className="h-14 md:h-16 w-auto object-contain transition-all duration-500" 
+          />
         </Link>
 
         {/* Links */}
@@ -44,8 +54,12 @@ export function Navbar() {
             <li key={l.to}>
               <Link
                 to={l.to}
-                className="relative px-4 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-primary transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-out"
-                activeProps={{ className: "text-primary after:scale-x-100" }}
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-out ${
+                  showDarkNavbar 
+                    ? "text-white/80 hover:text-white after:bg-white" 
+                    : "text-foreground/70 hover:text-primary"
+                }`}
+                activeProps={{ className: showDarkNavbar ? "text-white after:scale-x-100" : "text-primary after:scale-x-100" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
                 {l.label}
@@ -60,15 +74,17 @@ export function Navbar() {
             href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs"
             target="_blank"
             rel="noopener noreferrer"
-            className={getStartedClasses("primary", "h-10 text-sm pl-5 pr-11")}
+            className={getStartedClasses(showDarkNavbar ? "onDark" : "primary", "h-11 text-sm pl-5 pr-11")}
           >
-            <GetStartedInner label="Book a Consultation" variant="primary" />
+            <GetStartedInner label="Book a Consultation" variant={showDarkNavbar ? "onDark" : "primary"} />
           </a>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 rounded-lg text-foreground hover:bg-secondary/50 transition-colors"
+          className={`md:hidden p-2 rounded-lg transition-colors ${
+            showDarkNavbar ? "text-white hover:bg-white/10" : "text-foreground hover:bg-secondary/50"
+          }`}
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
