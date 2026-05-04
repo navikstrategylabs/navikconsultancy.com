@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 type Variant = "primary" | "onDark";
 
 const baseClasses =
-  "group relative inline-flex items-center overflow-hidden rounded-full text-base font-medium h-12 pl-6 pr-14 shadow-elegant transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap no-underline";
+  "group relative inline-flex items-center overflow-hidden rounded-full text-base font-medium h-12 pl-7 pr-16 shadow-elegant transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap no-underline";
 
 const variantClasses: Record<Variant, string> = {
   primary: "bg-primary text-primary-foreground hover:bg-primary/90",

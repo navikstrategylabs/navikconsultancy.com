@@ -22,9 +22,9 @@ import growthImg from "@/assets/growth_momentum.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { title: "Navik Strategy Labs — Where Strategy Meets Execution" },
       { name: "description", content: "We partner with startups and growing businesses to bring clarity to ideas, structure to operations, and momentum to growth." },
-      { property: "og:title", content: "NaviK Strategy Labs — Where Strategy Meets Execution" },
+      { property: "og:title", content: "Navik Strategy Labs — Where Strategy Meets Execution" },
       { property: "og:description", content: "Strategy + Execution under one roof. Bring clarity, structure, and momentum to your business." },
     ],
   }),
@@ -75,19 +75,13 @@ function HomePage() {
     <PageShell noPadding>
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{ 
-            WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
-            maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)"
-          }}
-        >
+        <div className="absolute inset-0">
           <div className="absolute inset-0 bg-hero-gradient" />
           <div className="absolute inset-0 bg-radial-glow opacity-70" />
           <InfiniteGrid />
         </div>
 
-        <div className="container-tight relative py-24 md:py-36">
+        <div className="container-tight relative py-32 md:py-44">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -134,10 +128,10 @@ function HomePage() {
       </section>
       <section className="py-24 md:py-40 relative">
         <div className="container-tight">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
             <Reveal>
               <p className="text-sm uppercase tracking-widest text-primary font-semibold">What We Do</p>
-              <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight max-w-xl">
                 From uncertainty to clarity. From planning to execution.
               </h2>
               <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
@@ -155,19 +149,16 @@ function HomePage() {
                 <div className="col-span-2 row-span-1 relative overflow-hidden rounded-3xl shadow-elegant hover-lift group">
                   <img src={strategyImg} alt="Strategy Planning" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                    <p className="text-white font-medium">Strategic Vision</p>
                   </div>
                 </div>
                 <div className="col-span-1 row-span-1 relative overflow-hidden rounded-3xl shadow-elegant hover-lift group">
                   <img src={executionImg} alt="Hands-on Execution" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                    <p className="text-white font-sm">Seamless Execution</p>
                   </div>
                 </div>
                 <div className="col-span-1 row-span-1 relative overflow-hidden rounded-3xl shadow-elegant hover-lift group">
                   <img src={growthImg} alt="Sustainable Growth" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                    <p className="text-white font-sm">Scale & Growth</p>
                   </div>
                 </div>
               </div>
