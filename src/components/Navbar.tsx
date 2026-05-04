@@ -74,7 +74,7 @@ export function Navbar() {
             href="https://navikstrategylabs.zohobookings.in/#/navikstrategylabs"
             target="_blank"
             rel="noopener noreferrer"
-            className={getStartedClasses(showDarkNavbar ? "onDark" : "primary", "h-11 text-sm pl-5 pr-11")}
+            className={getStartedClasses(showDarkNavbar ? "onDark" : "primary", "h-11 text-sm pl-6 pr-16")}
           >
             <GetStartedInner label="Book a Consultation" variant={showDarkNavbar ? "onDark" : "primary"} />
           </a>
