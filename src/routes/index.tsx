@@ -176,7 +176,7 @@ function HomePage() {
         <div className="container-tight">
           <Reveal className="max-w-2xl mb-14">
             <p className="text-sm uppercase tracking-widest text-primary font-semibold">Core Services</p>
-            <h2 className="mt-3 text-4xl md:text-5xl font-bold">A complete partner for the journey.</h2>
+            <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight max-w-xl">A complete partner for the journey.</h2>
           </Reveal>
           <Reveal>
             <RuixenBentoCards

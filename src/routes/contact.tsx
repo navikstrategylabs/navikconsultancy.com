@@ -82,7 +82,7 @@ function ContactPage() {
           {/* Info */}
           <Reveal className="lg:col-span-4 h-full">
             <HoverGlow 
-              className="rounded-3xl bg-hero-gradient text-primary-foreground p-10 h-full border border-white/5"
+              className="rounded-3xl bg-hero-gradient text-primary-foreground pl-10 pr-14 py-10 h-full border border-white/5"
               glowColor="rgba(255,255,255,0.4)"
             >
               <div className="absolute inset-0 bg-radial-glow opacity-50" />
@@ -139,31 +139,31 @@ function ContactPage() {
               <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2 group">
                   <Label htmlFor="name" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Name</Label>
-                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/40 transition-all duration-200 bg-background">
-                    <Input id="name" name="name" placeholder="Your full name" required maxLength={100} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
+                  <div className="rounded-lg ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/40 transition-all duration-200 bg-background">
+                    <Input id="name" name="name" placeholder="Your full name" required maxLength={100} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-lg shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="company" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Company Name</Label>
-                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
-                    <Input id="company" name="company" placeholder="Company / Brand" maxLength={120} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
+                  <div className="rounded-lg ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Input id="company" name="company" placeholder="Company / Brand" maxLength={120} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-lg shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Email</Label>
-                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
-                    <Input id="email" name="email" type="email" placeholder="you@company.com" required maxLength={255} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
+                  <div className="rounded-lg ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Input id="email" name="email" type="email" placeholder="you@company.com" required maxLength={255} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-lg shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Phone</Label>
-                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
-                    <Input id="phone" name="phone" type="tel" placeholder="+91 ..." maxLength={40} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl shadow-none" />
+                  <div className="rounded-lg ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                    <Input id="phone" name="phone" type="tel" placeholder="+91 ..." maxLength={40} className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-lg shadow-none" />
                   </div>
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <Label htmlFor="message" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">What do you need help with?</Label>
-                  <div className="rounded-xl ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
+                  <div className="rounded-lg ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/40 transition-all duration-200 bg-background">
                     <Textarea
                       id="message"
                       name="message"
@@ -171,7 +171,7 @@ function ContactPage() {
                       rows={6}
                       required
                       maxLength={2000}
-                      className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-xl resize-none shadow-none"
+                      className="border-0 ring-0 focus-visible:ring-0 bg-transparent rounded-lg resize-none shadow-none"
                     />
                   </div>
                 </div>
