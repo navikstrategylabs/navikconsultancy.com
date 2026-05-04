@@ -15,7 +15,7 @@ import { ApproachSection } from "@/components/ui/approach-section";
 import { UniqueTestimonials } from "@/components/ui/unique-testimonial";
 import RuixenBentoCards from "@/components/ui/ruixen-bento-cards";
 import { PixelCanvas } from "@/components/ui/pixel-canvas";
-import strategyImg from "@/assets/strategy_planning.png";
+import strategyImg from "@/assets/strategy_planning.jpeg";
 import executionImg from "@/assets/execution_workspace.jpeg";
 import growthImg from "@/assets/growth_momentum.png";
 
@@ -72,7 +72,7 @@ function HomePage() {
   const ctaGlowBackground = useMotionTemplate`radial-gradient(circle 400px at ${ctaMouseX}px ${ctaMouseY}px, rgba(255,255,255,0.3), transparent 80%)`;
 
   return (
-    <PageShell>
+    <PageShell noPadding>
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div 
