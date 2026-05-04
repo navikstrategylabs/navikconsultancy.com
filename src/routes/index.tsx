@@ -224,7 +224,7 @@ function HomePage() {
         <div className="container-tight">
           <Reveal className="text-center mb-16">
             <p className="text-sm uppercase tracking-widest text-primary font-semibold">Trusted By</p>
-            <h2 className="mt-4 text-3xl md:text-5xl font-bold">Founders & teams we've partnered with.</h2>
+            <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">Founders & teams we've partnered with.</h2>
           </Reveal>
         </div>
         <TrustedLogosMarquee />
@@ -236,7 +236,7 @@ function HomePage() {
           <Reveal>
             <div className="text-center mb-4">
               <p className="text-sm uppercase tracking-widest text-primary font-semibold">Client Voices</p>
-              <h2 className="mt-3 text-4xl md:text-5xl font-bold">What our partners say.</h2>
+              <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">What our partners say.</h2>
             </div>
             <UniqueTestimonials />
           </Reveal>
