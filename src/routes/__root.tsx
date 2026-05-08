@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { WhatsappWidget } from "../components/WhatsappWidget";
 
 
 
@@ -63,6 +64,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       {children}
+      <WhatsappWidget />
     </>
   );
 }
