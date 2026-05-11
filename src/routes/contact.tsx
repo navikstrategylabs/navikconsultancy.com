@@ -36,7 +36,7 @@ const schema = z.object({
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const data = {
@@ -51,12 +51,36 @@ function ContactPage() {
       toast.error(parsed.error.issues[0]?.message ?? "Please check your inputs");
       return;
     }
+
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+
+    try {
+      const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdRu7Ee-vvK7kj9jKNpUoeq5obUv58natoMVrIUhaqeTPdPBQ/formResponse";
+      
+      const formData = new URLSearchParams();
+      formData.append("entry.2007237544", data.name);
+      formData.append("entry.1614850477", data.company);
+      formData.append("entry.594475807", data.email);
+      formData.append("entry.1447989458", data.phone);
+      formData.append("entry.1940278754", data.message);
+
+      await fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString(),
+      });
+
       toast.success("Thanks! We'll get back to you shortly.");
       (e.target as HTMLFormElement).reset();
-    }, 700);
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
