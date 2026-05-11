@@ -55,22 +55,26 @@ function ContactPage() {
     setSubmitting(true);
 
     try {
-      const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdRu7Ee-vvK7kj9jKNpUoeq5obUv58natoMVrIUhaqeTPdPBQ/formResponse";
+      const ZOHO_CRM_URL = "https://crm.zoho.in/crm/WebToLeadForm";
       
-      const formData = new URLSearchParams();
-      formData.append("entry.2007237544", data.name);
-      formData.append("entry.1614850477", data.company);
-      formData.append("entry.594475807", data.email);
-      formData.append("entry.1447989458", data.phone);
-      formData.append("entry.1940278754", data.message);
+      const formData = new FormData();
+      formData.append("xnQsjsdp", "cdd094a970a01d2e228ecbda45868b144b778b7d8e3c75822696f4803858beea");
+      formData.append("xmIwtLD", "932a961e1b69a0728db001f48d1aa447ec17fe6a0d1bfd53c4a91ab875f74ee22346ff7979e100e2a4f814810aafcf80");
+      formData.append("actionType", "TGVhZHM=");
+      formData.append("returnURL", "null");
+      formData.append("zc_gad", "");
+      formData.append("aG9uZXlwb3Q", "");
+      
+      formData.append("Last Name", data.name);
+      formData.append("Company", data.company);
+      formData.append("Email", data.email);
+      formData.append("Phone", data.phone);
+      formData.append("Description", data.message);
 
-      await fetch(GOOGLE_FORM_URL, {
+      await fetch(ZOHO_CRM_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData.toString(),
+        body: formData,
       });
 
       toast.success("Thanks! We'll get back to you shortly.");
